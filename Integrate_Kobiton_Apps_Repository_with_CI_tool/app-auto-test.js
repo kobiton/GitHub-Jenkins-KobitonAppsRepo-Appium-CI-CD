@@ -40,6 +40,7 @@ describe('Android App sample', () => {
     driver.init(desiredCaps)
       .then((data) => {
         sessionId = data[1].kobitonSessionId
+        console.log(`SessionID used for the next step ${sessionId}`)
         done()
       })
       .catch((err) => {
@@ -58,7 +59,6 @@ describe('Android App sample', () => {
       driver.quit()
         .then(() => {
           done()
-          console.log(`Complete session ${sessionId}`)
         })
     }
   })
