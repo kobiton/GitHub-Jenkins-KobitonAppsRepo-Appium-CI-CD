@@ -25,19 +25,40 @@ They will need your API key value which you can get at: https://portal.kobiton.c
 
 ## B1. Upload app to Kobiton apps repo
 
+### Upload new app
 This sample will upload `apps/ContactManager.apk` file to apps repo and show the app ID of this app.
 
 ```bash
-KOBITON_USERNAME=<YOUR_USERNAME> KOBITON_API_KEY=<YOUR_KOBITON_API_KEY> node upload-app.js apps/ContactManager.apk ContactManager.apk
+KOBITON_USERNAME=<YOUR_USERNAME> KOBITON_API_KEY=<YOUR_KOBITON_API_KEY> node upload-app.js apps/ContactManager.apk
 ```
 
 Sample output:
 
 ```bash
-7441
+{ appId: 7441, versionId: 23 }
 ```
 
-In this sample output, the App ID is 7441.
+In this sample output, the App ID is 7441 and version 23.
+
+### Upload new version for existing app
+
+This sample will upload `apps/ContactManager.apk` file to apps repo and show new app version ID of this app.
+
+```bash
+KOBITON_USERNAME=<YOUR_USERNAME> KOBITON_API_KEY=<YOUR_KOBITON_API_KEY> node upload-app.js apps/ContactManager.apk <YOUR_APP_ID>
+```
+
+Example:  
+```bash
+KOBITON_USERNAME=demo KOBITON_API_KEY=api-key-abc node upload-app.js apps/ContactManager.apk 7441
+```
+Sample output:
+
+```bash
+{ appId: 7441, versionId: 24 }
+```
+
+In this sample output, the App ID is 7441 and version 24.
 
 ## B2. Run app test for uploaded app
 
