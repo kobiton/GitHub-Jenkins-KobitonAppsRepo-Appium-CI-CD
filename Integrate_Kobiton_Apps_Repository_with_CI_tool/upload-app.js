@@ -4,10 +4,10 @@ const fs = require('fs')
 const username = process.env.KOBITON_USERNAME
 const apiKey = process.env.KOBITON_API_KEY
 const baseUrl = 'https://api.kobiton.com/v1'
-
 const args = process.argv.slice(2)
 const appPath = args[0]
 const appName = args[1]
+const appId = args[2]
 
 function getToken() {
   return new Buffer(`${username}:${apiKey}`).toString('base64')
@@ -58,16 +58,25 @@ function uploadFileToS3(preSignedUrl, filePath, cb) {
   }, cb)
 }
 
-function generateUploadUrl(filename, cb) {
+function generateUploadUrl(filename, appId, cb) {
+  const body = {
+    filename
+  }
+  
+  // specific appId if you want to upload new app version for existing app.
+  if (appId) {
+    body.appId = appId
+  }
+
   send({
     method: 'POST',
     path: 'apps/uploadUrl',
-    body: {filename}
+    body
   }, cb)
 }
 
-function uploadApp(filePath, fileName = 'appName') {
-  generateUploadUrl(filePath, (error, response, uploadUrlResponse) => {
+function uploadApp(filePath, fileName = 'appName', appId) {
+  generateUploadUrl(filePath, appId, (error, response, uploadUrlResponse) => {
     if (error) {
       console.error(error)
       return
@@ -88,4 +97,4 @@ function uploadApp(filePath, fileName = 'appName') {
   })
 }
 
-uploadApp(appPath, appName)
+uploadApp(appPath, appName, appId)
