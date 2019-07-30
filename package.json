@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --no-timeouts app-auto-test"
+    "test": "node_modules/.bin/mocha --no-timeouts app-auto-test"
   },
   "dependencies": {
     "chai": "^4.1.2",
