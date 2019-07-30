@@ -14,9 +14,16 @@ const kobitonServerConfig = {
 
 const desiredCaps = {
   sessionName: 'Apps Repo Demo',
-  sessionDescription: 'This is an example to demostrate Android apps repo',
-  platformName: 'android',
-  deviceName: 'Galaxy'
+  sessionDescription: 'This is an example to demonstrate Android apps repo',
+  deviceOrientation:  'portrait',
+  captureScreenshots: true,
+
+  // For deviceName, platformVersion Kobiton supports wildcard
+  // character *, with 3 formats: *text, text* and *text*
+  // If there is no *, Kobiton will match the exact text provided
+  deviceName:         'Xperia XA',
+  platformVersion:    '6.0',
+  platformName:       'Android'
 }
 
 let driver, sessionId
